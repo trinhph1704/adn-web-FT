@@ -65,8 +65,8 @@ export default function Sidebar({ items, title = 'ADN Huyết Thống' }: Sideba
                     onClick={() => toggleDropdown(item.heading)}
                     className={`flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                       isActive(item.href)
-                        ? 'bg-white font-bold text-[#1F2B6C]'
-                        : 'text-white hover:bg-white hover:text-[#1F2B6C]'
+                        ? 'bg-[#FCFEFE] font-bold text-[#1F2B6C]'
+                        : 'text-white hover:bg-[#FCFEFE] hover:text-[#1F2B6C]'
                     }`}
                   >
                     <div className="flex items-center">
@@ -89,8 +89,8 @@ export default function Sidebar({ items, title = 'ADN Huyết Thống' }: Sideba
                             <div
                               className={`flex cursor-pointer items-center rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                                 isActive(child.href)
-                                  ? 'bg-white font-bold text-[#1F2B6C]'
-                                  : 'text-white hover:bg-white hover:text-[#1F2B6C]'
+                                  ? 'bg-[#FCFEFE] font-bold text-[#1F2B6C]'
+                                  : 'text-white hover:bg-[#FCFEFE] hover:text-[#1F2B6C]'
                               }`}
                             >
                               <div className="mr-3 text-lg">
@@ -109,8 +109,8 @@ export default function Sidebar({ items, title = 'ADN Huyết Thống' }: Sideba
                   <div
                     className={`flex cursor-pointer items-center rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                       isActive(item.href)
-                        ? 'bg-white font-bold text-[#1F2B6C]'
-                        : 'text-white hover:bg-white hover:text-[#1F2B6C]'
+                        ? 'bg-[#FCFEFE] font-bold text-[#1F2B6C]'
+                        : 'text-white hover:bg-[#FCFEFE] hover:text-[#1F2B6C]'
                     }`}
                   >
                     <div className="mr-3 text-lg">
@@ -129,7 +129,7 @@ export default function Sidebar({ items, title = 'ADN Huyết Thống' }: Sideba
       <div className="px-4 py-6">
         <button
           onClick={handleLogout}
-          className="flex w-full items-center rounded-lg px-4 py-2 text-sm font-medium text-[#1F2B6C] bg-white hover:bg-gray-100 transition-colors"
+          className="flex w-full items-center rounded-lg px-4 py-2 text-sm font-medium text-[#1F2B6C] bg-white hover:bg-[#EDEBDF] transition-colors"
         >
           <LogOut size={18} className="mr-3" />
           Đăng xuất

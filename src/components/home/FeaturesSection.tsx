@@ -1,31 +1,27 @@
-import { ShieldCheck, Lock, Rocket, Users } from 'lucide-react';
-
-interface Feature {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-}
+import { Lock, Rocket, ShieldCheck, Users } from "lucide-react";
+import type { Feature } from "@/types/home.types";
 
 const features: Feature[] = [
   {
     icon: ShieldCheck,
-    title: 'Độ chính xác 99.99%',
-    description: 'Công nghệ phân tích ADN tiên tiến đảm bảo kết quả đáng tin cậy.',
+    title: "Độ chính xác 99.99%",
+    description:
+      "Công nghệ phân tích ADN tiên tiến đảm bảo kết quả đáng tin cậy.",
   },
   {
     icon: Lock,
-    title: 'Bảo mật tuyệt đối',
-    description: 'Dữ liệu được mã hóa, tuân thủ tiêu chuẩn bảo mật quốc tế.',
+    title: "Bảo mật tuyệt đối",
+    description: "Dữ liệu được mã hóa, tuân thủ tiêu chuẩn bảo mật quốc tế.",
   },
   {
     icon: Rocket,
-    title: 'Kết quả nhanh chóng',
-    description: 'Nhận kết quả trong 3-5 ngày làm việc, hỗ trợ giao tận nơi.',
+    title: "Kết quả nhanh chóng",
+    description: "Nhận kết quả trong 3-5 ngày làm việc, hỗ trợ giao tận nơi.",
   },
   {
     icon: Users,
-    title: 'Hỗ trợ chuyên gia',
-    description: 'Đội ngũ tư vấn 24/7, giải đáp mọi thắc mắc về xét nghiệm.',
+    title: "Hỗ trợ chuyên gia",
+    description: "Đội ngũ tư vấn 24/7, giải đáp mọi thắc mắc về xét nghiệm.",
   },
 ];
 
@@ -56,4 +52,3 @@ export default function FeaturesSection() {
     </section>
   );
 }
-

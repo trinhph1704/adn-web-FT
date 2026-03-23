@@ -1,0 +1,10 @@
+export { Blogs } from "./pages/Blogs";
+export { BookingModal } from "./components/BookingModal";
+export { BookingStatusPage } from "./pages/BookingStatusPage";
+export { BookingList } from "./pages/BookingList";
+export { Contacts } from "./pages/Contacts";
+export { DetailServices } from "./pages/DetailServices";
+export { Doctors } from "./pages/Doctors";
+export { EditBooking } from "./pages/EditBooking";
+export { EditProfile } from "./pages/EditProfile";
+export { Services } from "./pages/Services";

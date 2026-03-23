@@ -1,4 +1,4 @@
-import { Header, Footer } from '@/components/shared';
+import { Header, Footer } from "@/components/shared";
 import {
   HeroSection,
   FeaturesSection,
@@ -6,13 +6,14 @@ import {
   TestimonialsSection,
   TeamSection,
   FAQSection,
+  BlogSection,
   TrustSection,
   CTASection,
-} from '@/components/home';
+} from "@/components/home";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-200">
       <Header />
       <main>
         <HeroSection />
@@ -21,6 +22,7 @@ export default function HomePage() {
         <TestimonialsSection />
         <TeamSection />
         <FAQSection />
+        <BlogSection />
         <TrustSection />
         <CTASection />
       </main>

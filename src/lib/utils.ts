@@ -2,6 +2,7 @@
 
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,7 +13,7 @@ export function cn(...inputs: ClassValue[]) {
 
 // JWT Secret (should be in .env)
 const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-in-production';
-const JWT_EXPIRES_IN = '7d';
+const JWT_EXPIRES_IN = '2h'; // Changed to 2h to match BE
 
 // Password hashing
 export async function hashPassword(password: string): Promise<string> {
@@ -52,6 +53,24 @@ export function generateOTP(length: number = 6): string {
     otp += digits[Math.floor(Math.random() * 10)];
   }
   return otp;
+}
+
+// OTP hashing (using SHA256 like BE)
+export function hashOTP(code: string): string {
+  return crypto.createHash('sha256').update(code, 'utf8').digest('base64');
+}
+
+// Verify OTP
+export function verifyOTP(inputCode: string, storedHash: string): boolean {
+  const inputHash = hashOTP(inputCode);
+  return inputHash === storedHash;
+}
+
+// Generate Sample Code (like BE SampleCodeHelper)
+export function generateSampleCode(): string {
+  const ms = Date.now().toString().slice(-3); // Last 3 digits of milliseconds
+  const rand = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+  return `SMP-${ms}${rand}`;
 }
 
 // Validate email format

@@ -1,0 +1,75 @@
+/* DNA Animation */
+.dna-glow {
+  filter: drop-shadow(0 0 12px rgba(37, 99, 235, 0.6));
+  animation: dna-rotate 6s linear infinite;
+}
+
+@keyframes dna-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Testimonial Auto-Scroll */
+.testimonial-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.auto-scroll-container {
+  display: flex;
+  gap: 1.5rem;
+  animation: scroll 30s linear infinite;
+}
+
+.testimonial-card {
+  flex-shrink: 0;
+  width: 20rem;
+  min-height: 12.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .testimonial-card {
+    width: 16rem;
+    min-height: 10rem;
+  }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Button Hover Effects */
+.ant-btn-primary {
+  transition: all 0.3s ease;
+}
+
+.ant-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Collapse Panel */
+.ant-collapse {
+  background: white !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.ant-collapse-header {
+  display: flex;
+  align-items: center;
+  font-weight: 500 !important;
+}
+
+.ant-collapse-content {
+  background: white !important;
+}

@@ -10,18 +10,18 @@ export enum UserRole {
 }
 
 export enum BookingStatus {
-  Pending = 0,              // Chờ xử lý
-  PreparingKit = 1,         // Chuẩn bị kit test
-  DeliveringKit = 2,        // Đang giao kit
-  KitDelivered = 3,         // Đã giao kit
-  WaitingForSample = 4,     // Chờ lấy mẫu
-  ReturningSample = 5,      // Đang trả mẫu
-  SampleReceived = 6,       // Đã nhận mẫu
-  Testing = 7,              // Đang xét nghiệm
-  Completed = 8,            // Hoàn thành
-  Cancelled = 9,            // Đã hủy
-  StaffGettingSample = 10,  // Staff lấy mẫu
-  CheckIn = 11              // Check-in
+  Pending = 0,           // Chờ xử lý
+  DepositPaid = 1,       // Đã đặt cọc
+  KitDelivering = 2,     // Đang giao kit
+  KitDelivered = 3,      // Đã giao kit
+  SampleCollected = 4,   // Đã thu mẫu
+  SampleDelivering = 5,  // Đang giao mẫu về lab
+  SampleReceived = 6,    // Lab đã nhận mẫu
+  Testing = 7,           // Đang xét nghiệm
+  ResultReady = 8,       // Có kết quả
+  FullyPaid = 9,         // Đã thanh toán đủ
+  Completed = 10,        // Hoàn thành
+  Cancelled = 11         // Đã hủy
 }
 
 export enum TestServiceType {
@@ -54,19 +54,51 @@ export enum PaymentStatus {
 }
 
 export enum RelationshipToSubject {
-  Father = 0,
-  Mother = 1,
-  Child = 2,
-  Sibling = 3,
-  Grandparent = 4,
+  Unknown = 0,
+  Father = 1,
+  Mother = 2,
+  Child = 3,
+  Grandfather = 4,
+  Grandmother = 5,
+  Grandchild = 6,
+  Brother = 7,
+  Sister = 8,
+  Uncle = 9,
+  Aunt = 10,
+  Nephew = 11,
+  Niece = 12,
   Other = 99
 }
 
 export enum LogisticStatus {
-  Pending = 0,
-  InProgress = 1,
-  Completed = 2,
-  Failed = 3
+  PreparingKit = 0,      // Đang chuẩn bị bộ kit
+  DeliveringKit = 1,     // Đang giao bộ kit đến client
+  KitDelivered = 2,      // Client đã nhận bộ kit
+  WaitingForPickup = 3,  // Đợi staff đến lấy mẫu
+  PickingUpSample = 4,   // Staff đang lấy mẫu
+  SampleReceived = 5,    // Đã nhận được mẫu tại cơ sở
+  Cancelled = 6          // Hủy giao hoặc lấy mẫu
+}
+
+export enum LogisticsType {
+  Delivery = 0,  // Giao kit
+  Pickup = 1     // Lấy mẫu
+}
+
+export enum OtpDeliveryMethod {
+  Email = 0,
+  Sms = 1
+}
+
+export enum OtpPurpose {
+  ResetPassword = 0,
+  VerifyAccount = 1,
+  TwoFactorAuth = 2
+}
+
+export enum BlogStatus {
+  Draft = 0,
+  Published = 1
 }
 
 // ============================================
@@ -98,6 +130,8 @@ export interface TestService extends BaseEntity {
   sampleCount: number;
   type: TestServiceType;
   isActive: boolean;
+  imageUrl?: string;
+  features?: string[];
   prices?: ServicePrice[];
 }
 
@@ -107,7 +141,7 @@ export interface ServicePrice extends BaseEntity {
   price: number;
   collectionMethod: SampleCollectionMethod;
   effectiveFrom: Date;
-  effectiveTo?: Date;
+  effectiveTo?: Date | null;
   testServiceInfo?: TestService;
 }
 
@@ -183,12 +217,28 @@ export interface Payment extends BaseEntity {
 
 // Logistics Info
 export interface LogisticsInfo extends BaseEntity {
+  staffId?: string;
+  staff?: User;
+  name: string;
   address: string;
   phone: string;
-  status: LogisticStatus;
   scheduledAt?: Date;
   completedAt?: Date;
   note?: string;
+  evidenceImageUrl?: string;
+  type: LogisticsType;
+  status: LogisticStatus;
+}
+
+// OTP Code
+export interface OtpCode extends BaseEntity {
+  userId: string;
+  hashedCode: string;
+  deliveryMethod: OtpDeliveryMethod;
+  purpose: OtpPurpose;
+  expiresAt: Date;
+  isUsed: boolean;
+  sentTo?: string;
 }
 
 // Blog & Tags
@@ -265,12 +315,40 @@ export interface ConfirmResetPasswordRequest {
   newPassword: string;
 }
 
+export interface CreateStaffRequest {
+  fullName: string;
+  email: string;
+  phone: string;
+  password: string;
+  address: string;
+  role: UserRole.Staff | UserRole.Manager;
+}
+
+export interface UpdateProfileRequest {
+  fullName?: string;
+  phone?: string;
+  address?: string;
+}
+
+export interface UserProfileResponse {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  address: string;
+  role: string;
+  isActive: boolean;
+  createdAt: Date;
+}
+
 // Service DTOs
 export interface CreateTestServiceDto {
   name: string;
   description: string;
   sampleCount: number;
   type: TestServiceType;
+  imageUrl?: string;
+  features?: string[];
   prices: CreateServicePriceDto[];
 }
 
@@ -286,6 +364,24 @@ export interface UpdateTestServiceDto {
   sampleCount?: number;
   type?: TestServiceType;
   isActive?: boolean;
+  imageUrl?: string;
+  features?: string[];
+}
+
+// Service Price DTOs
+export interface CreateServicePriceFullDto {
+  serviceId: string;
+  price: number;
+  collectionMethod: SampleCollectionMethod;
+  effectiveFrom?: Date;
+  effectiveTo?: Date;
+}
+
+export interface UpdateServicePriceDto {
+  id: string;
+  price?: number;
+  collectionMethod?: SampleCollectionMethod;
+  effectiveTo?: Date;
 }
 
 // Booking DTOs
@@ -351,17 +447,17 @@ export interface PaginatedResult<T> {
 // Status Labels (Vietnamese)
 export const BookingStatusLabels: Record<BookingStatus, string> = {
   [BookingStatus.Pending]: 'Chờ xử lý',
-  [BookingStatus.PreparingKit]: 'Chuẩn bị kit',
-  [BookingStatus.DeliveringKit]: 'Đang giao kit',
+  [BookingStatus.DepositPaid]: 'Đã đặt cọc',
+  [BookingStatus.KitDelivering]: 'Đang giao kit',
   [BookingStatus.KitDelivered]: 'Đã giao kit',
-  [BookingStatus.WaitingForSample]: 'Chờ lấy mẫu',
-  [BookingStatus.ReturningSample]: 'Đang trả mẫu',
+  [BookingStatus.SampleCollected]: 'Đã thu mẫu',
+  [BookingStatus.SampleDelivering]: 'Đang giao mẫu',
   [BookingStatus.SampleReceived]: 'Đã nhận mẫu',
   [BookingStatus.Testing]: 'Đang xét nghiệm',
+  [BookingStatus.ResultReady]: 'Có kết quả',
+  [BookingStatus.FullyPaid]: 'Đã thanh toán đủ',
   [BookingStatus.Completed]: 'Hoàn thành',
-  [BookingStatus.Cancelled]: 'Đã hủy',
-  [BookingStatus.StaffGettingSample]: 'Staff lấy mẫu',
-  [BookingStatus.CheckIn]: 'Check-in'
+  [BookingStatus.Cancelled]: 'Đã hủy'
 };
 
 export const UserRoleLabels: Record<UserRole, string> = {

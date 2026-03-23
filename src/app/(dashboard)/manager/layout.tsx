@@ -15,43 +15,43 @@ import {
 const managerSidebarItems = [
   {
     icon: BarChart3,
-    heading: 'Quản lí doanh thu',
+    heading: 'Thống kê',
     href: '/manager/dashboard',
   },
   {
     icon: ClipboardList,
-    heading: 'Quản lí đơn xét nghiệm',
-    href: '/manager/bookings',
+    heading: 'Đặt lịch xét nghiệm',
+    href: '/manager/test-booking',
   },
   {
     icon: Settings,
-    heading: 'Quản lí dịch vụ',
-    href: '/manager/services',
+    heading: 'Quản lý xét nghiệm',
+    href: '/manager/test-management',
   },
   {
     icon: Truck,
-    heading: 'Quản lý giao - nhận TestKit',
+    heading: 'Giao nhận',
     href: '/manager/delivery',
   },
   {
     icon: Tag,
-    heading: 'Quản lí thẻ bài viết',
+    heading: 'Thẻ tag',
     href: '/manager/tags',
   },
   {
     icon: FileText,
-    heading: 'Quản lí bài viết',
+    heading: 'Bài viết',
     href: '/manager/blogs',
   },
   {
     icon: Star,
-    heading: 'Các đánh giá',
+    heading: 'Phản hồi',
     href: '/manager/feedback',
   },
   {
     icon: CreditCard,
-    heading: 'Quản lí lịch sử thanh toán',
-    href: '/manager/payments',
+    heading: 'Thanh toán',
+    href: '/manager/list-payment',
   },
 ];
 
@@ -61,8 +61,8 @@ export default function ManagerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
-      <Sidebar items={managerSidebarItems} title="Manager Panel" />
+    <div className="flex h-screen overflow-hidden bg-[#FCFEFE]">
+      <Sidebar items={managerSidebarItems} title="ADN Huyết Thống" />
       <main className="flex-1 overflow-y-auto">{children}</main>
     </div>
   );

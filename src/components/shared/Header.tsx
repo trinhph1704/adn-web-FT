@@ -3,117 +3,196 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, Dna, User, LogOut } from 'lucide-react';
+import { Dropdown, Button } from 'antd';
+import type { MenuProps } from 'antd';
+import { Dna, UserCircle2, Menu, X } from 'lucide-react';
 
-const navLinks = [
+const navItems = [
   { href: '/', label: 'Trang chủ' },
+  { href: '/about', label: 'Về chúng tôi' },
   { href: '/services', label: 'Dịch vụ' },
-  { href: '/about', label: 'Giới thiệu' },
-  { href: '/contact', label: 'Liên hệ' },
+  { href: '/blogs', label: 'Tin tức' },
+  { href: '/contacts', label: 'Liên hệ' },
 ];
 
 interface UserInfo {
   userName: string;
+  fullName?: string;
   role: string;
   userId: string;
 }
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const pathname = usePathname();
   const router = useRouter();
 
-  // Check auth state from localStorage on mount
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userStr = localStorage.getItem('user');
-    
-    if (token && userStr) {
+    const userStr = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+    if (userStr) {
       try {
         const user = JSON.parse(userStr) as UserInfo;
-        setIsLoggedIn(true);
         setUserInfo(user);
       } catch {
-        // Invalid user data, clear storage
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        setUserInfo(null);
       }
+    } else {
+      setUserInfo(null);
     }
-  }, [pathname]); // Re-check when pathname changes
+  }, [pathname]);
 
   const handleLogout = () => {
+    localStorage.removeItem('accountId');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    setIsLoggedIn(false);
     setUserInfo(null);
-    router.push('/');
+    router.push('/login');
   };
 
-  const userRole = userInfo?.role || null;
+  const getClientHomeLink = () => '/customer';
 
-  const getDashboardLink = () => {
-    switch (userRole) {
-      case 'Admin':
-        return '/admin/dashboard';
-      case 'Staff':
-        return '/staff/test-sample';
-      case 'Manager':
-        return '/manager/dashboard';
-      case 'Client':
-        return '/customer/bookings';
-      default:
-        return '/customer/bookings';
+  const getNavHref = (itemHref: string) => {
+    if (userInfo?.role === 'Client') {
+      if (itemHref === '/') return '/customer';
+      return `/customer${itemHref}`;
     }
+    return itemHref;
   };
+
+  const isActive = (href: string) => {
+    const fullPath = getNavHref(href);
+    return pathname === fullPath || (href !== '/' && pathname.startsWith(fullPath));
+  };
+
+  const dropdownItems: MenuProps['items'] = [
+    {
+      key: 'profile',
+      label: 'Hồ sơ cá nhân',
+      onClick: () => router.push('/customer/edit-profile'),
+    },
+    {
+      key: 'bookings',
+      label: 'Lịch sử đặt lịch',
+      onClick: () => router.push('/customer/booking-list'),
+    },
+    {
+      key: 'logout',
+      label: 'Đăng xuất',
+      danger: true,
+      onClick: handleLogout,
+    },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600">
-              <Dna size={24} className="text-white" />
-            </div>
-            <span className="text-xl font-bold text-blue-900">Bloodline DNA</span>
-          </Link>
+    <header className="sticky top-0 z-50 shadow-sm bg-white/90 backdrop-blur-md">
+      <div className="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <Link
+          href={userInfo?.role === 'Client' ? getClientHomeLink() : '/'}
+          className="flex items-center space-x-3"
+        >
+          <div className="flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full">
+            <Dna size={24} className="text-white" />
+          </div>
+          <span className="text-2xl font-bold text-gray-800">ADN Huyết Thống</span>
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+        <nav className="hidden space-x-8 md:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={getNavHref(item.href)}
+              className={`relative transition-colors duration-300 after:absolute after:left-0 after:bottom-[-2px] after:h-[2px] after:transition-all after:duration-300 after:bg-blue-600 ${
+                isActive(item.href)
+                  ? 'text-blue-600 after:w-full'
+                  : 'text-gray-600 hover:text-blue-600 after:w-0 hover:after:w-full'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden md:flex items-center space-x-4">
+          {userInfo && userInfo.role === 'Client' ? (
+            <Dropdown menu={{ items: dropdownItems }} placement="bottomRight" arrow>
+              <div className="flex items-center space-x-2 cursor-pointer">
+                <UserCircle2 size={32} className="text-blue-600" />
+                <span className="font-semibold text-gray-700">
+                  {userInfo.fullName || userInfo.userName}
+                </span>
+              </div>
+            </Dropdown>
+          ) : (
+            <>
               <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                  pathname === link.href ? 'text-blue-600' : 'text-gray-700'
-                }`}
+                href="/login"
+                className="font-semibold text-blue-600 transition-colors hover:text-blue-800"
               >
-                {link.label}
+                Đăng nhập
+              </Link>
+              <Link href="/register">
+                <Button
+                  type="primary"
+                  size="large"
+                  className="!bg-blue-600 !border-none shadow-lg hover:!bg-blue-700 hover:!shadow-xl"
+                >
+                  Đăng ký ngay
+                </Button>
+              </Link>
+            </>
+          )}
+        </div>
+
+        <button
+          className="p-2 text-gray-700 md:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {isMenuOpen && (
+        <div className="py-4 border-t md:hidden">
+          <nav className="flex flex-col gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={getNavHref(item.href)}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  isActive(item.href)
+                    ? 'bg-blue-50 text-blue-600'
+                    : 'text-gray-700 hover:bg-gray-50'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
               </Link>
             ))}
-          </nav>
-
-          {/* Auth Buttons */}
-          <div className="hidden md:flex items-center gap-3">
-            {isLoggedIn && userInfo ? (
+            <hr className="my-2" />
+            {userInfo && userInfo.role === 'Client' ? (
               <>
-                <span className="text-sm text-gray-600">
-                  Xin chào, <span className="font-semibold text-blue-600">{userInfo.userName}</span>
-                </span>
-                <Link
-                  href={getDashboardLink()}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 transition-colors hover:text-blue-800"
+                <div className="px-4 py-2 text-sm text-gray-600">
+                  <span className="font-semibold text-blue-600">
+                    {userInfo.fullName || userInfo.userName}
+                  </span>
+                </div>
+                <button
+                  onClick={() => {
+                    router.push('/customer/booking-list');
+                    setIsMenuOpen(false);
+                  }}
+                  className="px-4 py-2 text-sm font-medium text-left text-gray-700 hover:bg-gray-50 rounded-lg"
                 >
-                  <User size={18} />
-                  Dashboard
-                </Link>
-                <button 
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-red-600"
+                  Lịch sử đặt lịch
+                </button>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="px-4 py-2 text-sm font-medium text-left text-red-600 hover:bg-red-50 rounded-lg"
                 >
-                  <LogOut size={18} />
                   Đăng xuất
                 </button>
               </>
@@ -121,92 +200,23 @@ export default function Header() {
               <>
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm font-medium text-blue-600 transition-colors hover:text-blue-800"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Đăng nhập
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 text-sm font-medium text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700"
+                  className="px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  Đăng ký
+                  Đăng ký ngay
                 </Link>
               </>
             )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 text-gray-700"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </nav>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <nav className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    pathname === link.href
-                      ? 'bg-blue-50 text-blue-600'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <hr className="my-2" />
-              {isLoggedIn && userInfo ? (
-                <>
-                  <div className="px-4 py-2 text-sm text-gray-600">
-                    Xin chào, <span className="font-semibold text-blue-600">{userInfo.userName}</span>
-                  </div>
-                  <Link
-                    href={getDashboardLink()}
-                    className="px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-lg"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                  <button 
-                    onClick={() => {
-                      handleLogout();
-                      setIsMenuOpen(false);
-                    }}
-                    className="px-4 py-2 text-sm font-medium text-left text-red-600 hover:bg-red-50 rounded-lg"
-                  >
-                    Đăng xuất
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/login"
-                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Đăng nhập
-                  </Link>
-                  <Link
-                    href="/register"
-                    className="px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Đăng ký
-                  </Link>
-                </>
-              )}
-            </nav>
-          </div>
-        )}
-      </div>
+      )}
     </header>
   );
 }

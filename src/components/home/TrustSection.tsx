@@ -1,12 +1,9 @@
-interface TrustIndicator {
-  value: string;
-  label: string;
-}
+import type { TrustIndicator } from "@/types/home.types";
 
 const indicators: TrustIndicator[] = [
-  { value: '10K+', label: 'Khách hàng' },
-  { value: '50K+', label: 'Xét nghiệm ADN' },
-  { value: '100+', label: 'Chuyên gia' },
+  { value: "10K+", label: "Khách hàng" },
+  { value: "50K+", label: "Xét nghiệm ADN" },
+  { value: "100+", label: "Chuyên gia" },
 ];
 
 export default function TrustSection() {
@@ -30,4 +27,3 @@ export default function TrustSection() {
     </section>
   );
 }
-

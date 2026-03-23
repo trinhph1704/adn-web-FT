@@ -1,31 +1,26 @@
-import Image from 'next/image';
-
-interface TeamMember {
-  name: string;
-  title: string;
-  image: string;
-}
+import Image from "next/image";
+import type { TeamMember } from "@/types/home.types";
 
 const team: TeamMember[] = [
   {
-    name: 'TS. Nguyễn Minh',
-    title: 'Chuyên gia Di truyền học',
-    image: 'https://taimuihongsg.com/wp-content/uploads/2023/10/BS-TRUONG-CONG-TRANG-KHOA-CHAN-DOAN-HINH-ANH_taimuihongsg.jpg',
+    name: "TS. Nguyễn Minh",
+    title: "Chuyên gia Di truyền học",
+    image: "https://taimuihongsg.com/wp-content/uploads/2023/10/BS-TRUONG-CONG-TRANG-KHOA-CHAN-DOAN-HINH-ANH_taimuihongsg.jpg",
   },
   {
-    name: 'PGS. Trần Hương',
-    title: 'Chuyên gia Phân tích ADN',
-    image: 'https://nhakhoadelia.vn/wp-content/uploads/2024/04/28-1713601052.jpg',
+    name: "PGS. Trần Hương",
+    title: "Chuyên gia Phân tích ADN",
+    image: "https://nhakhoadelia.vn/wp-content/uploads/2024/04/28-1713601052.jpg",
   },
   {
-    name: 'BS. Lê Quang',
-    title: 'Tư vấn Huyết thống',
-    image: 'https://taimuihongsg.com/wp-content/uploads/2018/05/Kim-Bun-ThuongE_taimuihongsg.jpg',
+    name: "BS. Lê Quang",
+    title: "Tư vấn Huyết thống",
+    image: "https://taimuihongsg.com/wp-content/uploads/2018/05/Kim-Bun-ThuongE_taimuihongsg.jpg",
   },
   {
-    name: 'ThS. Phạm Linh',
-    title: 'Chuyên gia Phòng thí nghiệm',
-    image: 'https://nhakhoadelia.vn/wp-content/uploads/2024/04/25-1713601052.jpg',
+    name: "ThS. Phạm Linh",
+    title: "Chuyên gia Phòng thí nghiệm",
+    image: "https://nhakhoadelia.vn/wp-content/uploads/2024/04/25-1713601052.jpg",
   },
 ];
 
@@ -51,7 +46,9 @@ export default function TeamSection() {
               <h3 className="text-base font-semibold text-gray-800 md:text-lg">
                 {member.name}
               </h3>
-              <p className="text-sm text-gray-600 md:text-base">{member.title}</p>
+              <p className="text-sm text-gray-600 md:text-base">
+                {member.title}
+              </p>
             </div>
           ))}
         </div>
@@ -59,4 +56,3 @@ export default function TeamSection() {
     </section>
   );
 }
-

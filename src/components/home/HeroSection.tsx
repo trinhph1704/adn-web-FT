@@ -1,10 +1,31 @@
 'use client';
 
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Button } from 'antd';
 
 export default function HeroSection() {
+  const router = useRouter();
+
+  const handleBookNow = () => {
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        try {
+          const user = JSON.parse(storedUser);
+          if (user?.role === 'Client') {
+            router.push('/customer/bookings');
+            return;
+          }
+        } catch {
+          // ignore
+        }
+      }
+    }
+    router.push('/services');
+  };
+
   return (
-    <section className="relative py-20 overflow-hidden md:py-24 bg-gradient-to-br from-blue-50 to-blue-100">
+    <section className="relative py-20 overflow-hidden md:py-24">
       <div className="flex flex-col items-center px-4 mx-auto md:flex-row max-w-7xl sm:px-6 lg:px-8">
         <div className="mb-12 text-center md:w-1/2 md:text-left md:mb-0">
           <h1 className="mb-6 text-3xl font-bold leading-tight text-gray-800 md:text-4xl lg:text-5xl">
@@ -15,12 +36,14 @@ export default function HeroSection() {
             Xác định quan hệ huyết thống với độ chính xác 99.99%. Kết quả nhanh,
             bảo mật tuyệt đối, hỗ trợ tận tình.
           </p>
-          <Link
-            href="/services"
-            className="inline-flex items-center px-6 py-3 text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 hover:shadow-lg"
+          <Button
+            type="primary"
+            size="large"
+            className="px-4 py-2 md:px-6 md:py-3 md:text-sm !bg-blue-600 hover:!bg-blue-700"
+            onClick={handleBookNow}
           >
             Đặt lịch xét nghiệm
-          </Link>
+          </Button>
         </div>
         <div className="flex justify-center md:w-1/2">
           <div className="relative">
@@ -45,11 +68,51 @@ export default function HeroSection() {
                   <circle cx="16" cy="12" r="1.5" fill="currentColor" />
                   <circle cx="18" cy="16" r="1.5" fill="currentColor" />
                   <circle cx="16" cy="20" r="1.5" fill="currentColor" />
-                  <line x1="8" y1="4" x2="16" y2="4" stroke="currentColor" strokeWidth="1" opacity="0.8" />
-                  <line x1="6" y1="8" x2="18" y2="8" stroke="currentColor" strokeWidth="1" opacity="0.8" />
-                  <line x1="8" y1="12" x2="16" y2="12" stroke="currentColor" strokeWidth="1" opacity="0.8" />
-                  <line x1="6" y1="16" x2="18" y2="16" stroke="currentColor" strokeWidth="1" opacity="0.8" />
-                  <line x1="8" y1="20" x2="16" y2="20" stroke="currentColor" strokeWidth="1" opacity="0.8" />
+                  <line
+                    x1="8"
+                    y1="4"
+                    x2="16"
+                    y2="4"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    opacity="0.8"
+                  />
+                  <line
+                    x1="6"
+                    y1="8"
+                    x2="18"
+                    y2="8"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    opacity="0.8"
+                  />
+                  <line
+                    x1="8"
+                    y1="12"
+                    x2="16"
+                    y2="12"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    opacity="0.8"
+                  />
+                  <line
+                    x1="6"
+                    y1="16"
+                    x2="18"
+                    y2="16"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    opacity="0.8"
+                  />
+                  <line
+                    x1="8"
+                    y1="20"
+                    x2="16"
+                    y2="20"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    opacity="0.8"
+                  />
                 </g>
               </svg>
             </div>
@@ -62,4 +125,3 @@ export default function HeroSection() {
     </section>
   );
 }
-

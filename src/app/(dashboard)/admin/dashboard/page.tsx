@@ -63,7 +63,7 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#FCFEFE]">
       <DashboardHeader title="📊 Thống kê quản trị" />
 
       <div className="p-6">

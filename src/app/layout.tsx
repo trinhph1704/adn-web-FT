@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
+import AntdProvider from "@/components/providers/AntdProvider";
+import ChatbotAI from "@/components/chatbot/ChatbotAI";
+import { BookingModalProvider } from "@/components/customer/BookingModalProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -17,43 +20,43 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: {
-    default: "Bloodline DNA - Xét Nghiệm ADN Huyết Thống",
-    template: "%s | Bloodline DNA",
+    default: "ADN Huyết Thống - Xét nghiệm ADN chuyên nghiệp",
+    template: "%s | ADN Huyết Thống",
   },
   description:
-    "Dịch vụ xét nghiệm ADN huyết thống chính xác 99.99%. Kết quả nhanh chóng, bảo mật tuyệt đối, hỗ trợ 24/7.",
+    "Nền tảng xét nghiệm ADN huyết thống chuyên nghiệp, bảo mật và nhanh chóng. Xác định quan hệ gia đình với độ chính xác 99.99%.",
   keywords: [
     "xét nghiệm ADN",
     "ADN huyết thống",
-    "xác định quan hệ cha con",
-    "DNA test",
-    "xét nghiệm gen",
-    "bloodline DNA",
+    "xét nghiệm cha con",
+    "xét nghiệm pháp lý",
+    "ADN Huyết Thống",
+    "quan hệ huyết thống",
   ],
-  authors: [{ name: "Bloodline DNA Team" }],
-  creator: "Bloodline DNA",
+  authors: [{ name: "ADN Huyết Thống" }],
+  creator: "ADN Huyết Thống",
   openGraph: {
     type: "website",
     locale: "vi_VN",
-    url: "https://bloodline-dna.com",
-    siteName: "Bloodline DNA",
-    title: "Bloodline DNA - Xét Nghiệm ADN Huyết Thống",
+    url: "https://bloodlinedna.vn",
+    siteName: "ADN Huyết Thống",
+    title: "ADN Huyết Thống - Xét nghiệm ADN chuyên nghiệp",
     description:
-      "Dịch vụ xét nghiệm ADN huyết thống chính xác 99.99%. Kết quả nhanh chóng, bảo mật tuyệt đối.",
+      "Nền tảng xét nghiệm ADN huyết thống chuyên nghiệp, bảo mật và nhanh chóng – đồng hành cùng bạn trong hành trình xác định quan hệ gia đình.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Bloodline DNA",
+        alt: "ADN Huyết Thống",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bloodline DNA - Xét Nghiệm ADN Huyết Thống",
+    title: "ADN Huyết Thống - Xét nghiệm ADN chuyên nghiệp",
     description:
-      "Dịch vụ xét nghiệm ADN huyết thống chính xác 99.99%. Kết quả nhanh chóng, bảo mật tuyệt đối.",
+      "Nền tảng xét nghiệm ADN huyết thống chuyên nghiệp, bảo mật và nhanh chóng.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -70,7 +73,12 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${inter.variable} ${roboto.variable}`}>
       <body className="antialiased min-h-screen bg-white">
-        {children}
+        <AntdProvider>
+          <BookingModalProvider>
+            {children}
+            <ChatbotAI />
+          </BookingModalProvider>
+        </AntdProvider>
       </body>
     </html>
   );

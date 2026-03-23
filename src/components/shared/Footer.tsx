@@ -1,123 +1,68 @@
+import { Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
-import { Dna, Mail, Phone, MapPin, Facebook, Youtube } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Company Info */}
+    <footer className="border-t border-blue-100 bg-blue-50">
+      <div className="px-6 py-12 mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600">
-                <Dna size={24} className="text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">Bloodline DNA</span>
-            </Link>
-            <p className="mb-4 text-sm leading-relaxed">
-              Dịch vụ xét nghiệm ADN huyết thống chính xác 99.99%. 
-              Kết quả nhanh chóng, bảo mật tuyệt đối.
+            <h2 className="mb-4 text-2xl font-bold text-blue-800">ADN Huyết Thống</h2>
+            <p className="text-sm leading-relaxed text-gray-600">
+              Nền tảng xét nghiệm ADN huyết thống chuyên nghiệp, bảo mật và nhanh
+              chóng – đồng hành cùng bạn trong hành trình xác định quan hệ gia đình.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-blue-400 transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="hover:text-red-400 transition-colors">
-                <Youtube size={20} />
-              </a>
-            </div>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="mb-4 text-lg font-semibold text-white">Liên kết nhanh</h4>
-            <ul className="space-y-2 text-sm">
+            <h3 className="mb-4 text-lg font-semibold text-blue-700">Liên kết nhanh</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Trang chủ
+                <Link href="/about" className="transition-colors hover:text-blue-600">
+                  Về chúng tôi
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  Dịch vụ
+                <Link href="/blogs" className="transition-colors hover:text-blue-600">
+                  Tin tức
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
-                  Giới thiệu
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <Link href="/contacts" className="transition-colors hover:text-blue-600">
                   Liên hệ
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="mb-4 text-lg font-semibold text-white">Dịch vụ</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/services?type=civil" className="hover:text-white transition-colors">
-                  Xét nghiệm Dân sự
-                </Link>
+            <h3 className="mb-4 text-lg font-semibold text-blue-700">Liên hệ</h3>
+            <ul className="space-y-3 text-sm text-gray-600">
+              <li className="flex items-start gap-2">
+                <Mail className="text-blue-500 flex-shrink-0" size={16} />
+                <span>bloodlineDNA@support.com</span>
               </li>
-              <li>
-                <Link href="/services?type=legal" className="hover:text-white transition-colors">
-                  Xét nghiệm Hành chính
-                </Link>
+              <li className="flex items-start gap-2">
+                <Phone className="text-blue-500 flex-shrink-0" size={16} />
+                <span>+ 84 342 555 702</span>
               </li>
-              <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  Lấy mẫu tại nhà
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  Lấy mẫu tại cơ sở
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="mb-4 text-lg font-semibold text-white">Liên hệ</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">
-                <MapPin size={16} className="text-blue-400" />
-                <span>123 Đường ABC, Quận 1, TP.HCM</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone size={16} className="text-blue-400" />
-                <a href="tel:1900xxxx" className="hover:text-white transition-colors">
-                  1900-xxxx
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail size={16} className="text-blue-400" />
-                <a href="mailto:info@bloodlinedna.com" className="hover:text-white transition-colors">
-                  info@bloodlinedna.com
-                </a>
+              <li className="flex items-start gap-2">
+                <MapPin className="text-blue-500 flex-shrink-0" size={16} />
+                <span>TP Ho Chi Minh, Vietnam</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <hr className="my-8 border-gray-700" />
-
-        <div className="flex flex-col items-center justify-between gap-4 text-sm md:flex-row">
-          <p>&copy; {new Date().getFullYear()} Bloodline DNA. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-white transition-colors">
-              Chính sách bảo mật
-            </Link>
-            <Link href="/terms" className="hover:text-white transition-colors">
-              Điều khoản sử dụng
-            </Link>
-          </div>
+        <div className="pt-8 mt-12 text-sm text-center text-gray-500 border-t border-gray-200">
+          © 2025 ADN Huyết Thống.
+          <p className="flex justify-center gap-4 pt-2">
+            <span>Bảo mật</span>
+            <span>–</span>
+            <span>Chính xác</span>
+            <span>–</span>
+            <span>Chuyên nghiệp</span>
+          </p>
         </div>
       </div>
     </footer>

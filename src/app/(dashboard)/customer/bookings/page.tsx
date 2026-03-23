@@ -33,7 +33,7 @@ const mockBookings: Booking[] = [
     id: '2',
     bookingCode: 'BK1002',
     serviceName: 'Xét nghiệm ADN Pháp lý',
-    status: BookingStatus.PreparingKit,
+    status: BookingStatus.DepositPaid,
     appointmentDate: '2025-01-08',
     collectionMethod: 'facility',
     price: 5500000,
@@ -65,8 +65,8 @@ const getStatusColor = (status: BookingStatus): string => {
   switch (status) {
     case BookingStatus.Pending:
       return 'bg-yellow-100 text-yellow-700';
-    case BookingStatus.PreparingKit:
-    case BookingStatus.DeliveringKit:
+    case BookingStatus.DepositPaid:
+    case BookingStatus.KitDelivering:
       return 'bg-blue-100 text-blue-700';
     case BookingStatus.Testing:
       return 'bg-purple-100 text-purple-700';

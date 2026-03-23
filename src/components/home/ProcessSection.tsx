@@ -1,31 +1,26 @@
-import { Calendar, FlaskConical, Dna, FileText } from 'lucide-react';
-
-interface ProcessStep {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-}
+import { Calendar, Dna, FileText, FlaskConical } from "lucide-react";
+import type { ProcessStep } from "@/types/home.types";
 
 const steps: ProcessStep[] = [
   {
     icon: Calendar,
-    title: 'Đặt lịch',
-    description: 'Đăng ký trực tuyến hoặc liên hệ để đặt lịch lấy mẫu.',
+    title: "Đặt lịch",
+    description: "Đăng ký trực tuyến hoặc liên hệ để đặt lịch lấy mẫu.",
   },
   {
     icon: FlaskConical,
-    title: 'Lấy mẫu',
-    description: 'Lấy mẫu ADN đơn giản tại cơ sở hoặc tại nhà.',
+    title: "Lấy mẫu",
+    description: "Lấy mẫu ADN đơn giản tại cơ sở hoặc tại nhà.",
   },
   {
     icon: Dna,
-    title: 'Phân tích',
-    description: 'Mẫu được phân tích trong phòng thí nghiệm hiện đại.',
+    title: "Phân tích",
+    description: "Mẫu được phân tích trong phòng thí nghiệm hiện đại.",
   },
   {
     icon: FileText,
-    title: 'Nhận kết quả',
-    description: 'Kết quả được gửi qua email bảo mật hoặc giao trực tiếp.',
+    title: "Nhận kết quả",
+    description: "Kết quả được gửi qua email bảo mật hoặc giao trực tiếp.",
   },
 ];
 
@@ -55,4 +50,3 @@ export default function ProcessSection() {
     </section>
   );
 }
-
