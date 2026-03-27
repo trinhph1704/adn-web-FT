@@ -25,7 +25,7 @@ export const PostCard: React.FC<PostCardProps> = ({
     setIsNavigating(true);
     try {
       const user = JSON.parse(localStorage.getItem("user") || "null");
-      const basePath = user?.role === "Client" ? "/customer" : "";
+      const basePath = user?.role === "Client" ? "" : "";
       // Tăng delay để user thấy loading rõ hơn
       await new Promise(resolve => setTimeout(resolve, 800));
       navigate(`${basePath}/blogs/${post.id}`);
@@ -41,7 +41,7 @@ export const PostCard: React.FC<PostCardProps> = ({
 
   const copyLink = async () => {
     const user = JSON.parse(localStorage.getItem("user") || "null");
-    const basePath = user?.role === "Client" ? "/customer" : "";
+    const basePath = user?.role === "Client" ? "" : "";
     const blogUrl = `${window.location.origin}${basePath}/blogs/${post.id}`;
     
     try {
@@ -190,7 +190,7 @@ export const PostCard: React.FC<PostCardProps> = ({
                   type="text"
                   value={(() => {
                     const user = JSON.parse(localStorage.getItem("user") || "null");
-                    const basePath = user?.role === "Client" ? "/customer" : "";
+                    const basePath = user?.role === "Client" ? "" : "";
                     return `${window.location.origin}${basePath}/blogs/${post.id}`;
                   })()}
                   readOnly

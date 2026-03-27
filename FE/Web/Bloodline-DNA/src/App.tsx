@@ -1,8 +1,8 @@
 import AppRouter from './Router/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
-import { BookingModalProvider } from './features/customer/components/BookingModalContext';
-import { BookingModal } from './features/customer/components/BookingModal';
-import { useBookingModal } from './features/customer/components/BookingModalContext';
+import { BookingModalProvider } from './features/components/BookingModalContext';
+import { BookingModal } from './features/components/BookingModal';
+import { useBookingModal } from './features/components/BookingModalContext';
 import ChatbotAI from './features/chatbotAI/components/ChatbotAI';
 
 function App() {

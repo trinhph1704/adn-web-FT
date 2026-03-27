@@ -13,7 +13,7 @@ export default function HeroSection() {
         try {
           const user = JSON.parse(storedUser);
           if (user?.role === 'Client') {
-            router.push('/customer/bookings');
+            router.push('/bookings');
             return;
           }
         } catch {

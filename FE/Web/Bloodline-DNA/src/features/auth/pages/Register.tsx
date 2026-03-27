@@ -8,7 +8,7 @@ import { Button, Checkbox, Form, Input, message } from "antd";
 import { Activity, Clock, Heart, Shield, UserPlus, Users } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AddressSelector } from "../../customer/components/AddressSelector";
+import { AddressSelector } from "../../components/AddressSelector";
 import { SuccessModal } from "../../../components";
 import Loading from "../../../components/Loading";
 import {

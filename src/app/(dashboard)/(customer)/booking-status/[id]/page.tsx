@@ -8,9 +8,9 @@ import { Loading } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBookingById } from "@/lib/api/bookings";
 import { BookingStatus } from "@/types";
-import { getStatusConfig } from "@/components/customer/bookingStatus/StatusConfig";
-import { BookingDetailTab } from "@/components/customer/bookingStatus/BookingDetailTab";
-import { BookingProgressTab } from "@/components/customer/bookingStatus/BookingProgressTab";
+import { getStatusConfig } from "@/components/bookingStatus/StatusConfig";
+import { BookingDetailTab } from "@/components/bookingStatus/BookingDetailTab";
+import { BookingProgressTab } from "@/components/bookingStatus/BookingProgressTab";
 
 export default function BookingStatusPage() {
   const params = useParams();
@@ -58,7 +58,7 @@ export default function BookingStatusPage() {
             {error ? "Vui lòng thử lại sau." : "Lịch hẹn không tồn tại hoặc đã bị xóa."}
           </p>
           <Button
-            onClick={() => router.push("/customer/booking-list")}
+            onClick={() => router.push("/booking-list")}
             className="bg-blue-900 text-white hover:bg-blue-800"
           >
             Về Danh Sách
@@ -87,7 +87,7 @@ export default function BookingStatusPage() {
                 Trang Chủ
               </Link>
               <span className="text-slate-400">/</span>
-              <Link href="/customer/booking-list" className="text-blue-600 hover:text-blue-800 hover:underline">
+              <Link href="/booking-list" className="text-blue-600 hover:text-blue-800 hover:underline">
                 Danh Sách Đặt Lịch
               </Link>
               <span className="text-slate-400">/</span>

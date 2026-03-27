@@ -3,16 +3,16 @@ import { Route, Routes } from "react-router-dom";
 import { NotFound } from "../components";
 import { Blogs, ForgotPasswordForm, Login, Register } from "../features";
 import { AboutPage } from "../features/about";
-import { Contacts, DetailServices, Doctors, Services } from "../features/customer";
-import BlogDetail from "../features/customer/pages/BlogDetails";
+import { Contacts, DetailServices, Doctors, Services } from "../features";
+import BlogDetail from "../features/pages/BlogDetails";
 import HomePage from "../features/home/pages/HomePage";
 import AdminRouter from "./AdminRouter";
-import CustomerRouter from "./CustomerRouter";
+import CustomerRouter from ".Router";
 import ManagerRouter from "./ManagerRouter";
 import StaffRouter from "./StaffRouter";
 // The customer imports are no longer needed here as they are handled in CustomerRouter
-// import { Blogs, Contacts, DetailServices, Doctors, Services } from "../features/customer";
-// import BlogDetail from "../features/customer/pages/BlogDetails";
+// import { Blogs, Contacts, DetailServices, Doctors, Services } from "../features";
+// import BlogDetail from "../features/pages/BlogDetails";
 
 const App: React.FC = () => {
   return (
@@ -36,7 +36,7 @@ const App: React.FC = () => {
       <Route path="/staff/*" element={<StaffRouter />} />
       <Route path="/manager/*"element={<ManagerRouter />} />
       <Route path="/admin/*" element={<AdminRouter />} />
-      <Route path="/customer/*" element={<CustomerRouter />} />
+      <Route path="/*" element={<CustomerRouter />} />
 
       {/* Not found */}
       <Route path="*" element={<NotFound />} />

@@ -19,13 +19,13 @@ const Header: React.FC = () => {
     <Menu>
       <Menu.Item
         key="profile"
-        onClick={() => navigate("/customer/edit-profile")}
+        onClick={() => navigate("/edit-profile")}
       >
         Hồ sơ cá nhân
       </Menu.Item>
       <Menu.Item
         key="bookings"
-        onClick={() => navigate("/customer/booking-list")}
+        onClick={() => navigate("/booking-list")}
       >
         Lịch sử đặt lịch
       </Menu.Item>
@@ -36,7 +36,7 @@ const Header: React.FC = () => {
   );
 
   const isActive = (path: string) => location.pathname === path;
-  const basePath = user?.role === "Client" ? "/customer" : "";
+  const basePath = user?.role === "Client" ? "" : "";
 
   const navItems = [
     { label: "Trang chủ", path: "/" },
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
     <header className="sticky top-0 z-50 shadow-sm bg-white/90 backdrop-blur-md">
       <div className="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link to={user?.role === "Client" ? "/customer" : "/"}>
+        <Link to={user?.role === "Client" ? "" : "/"}>
           <div className="flex items-center space-x-3">
             <div className="flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full">
               <Dna size={24} className="text-white" />
@@ -69,7 +69,7 @@ const Header: React.FC = () => {
 
             if (item.path === "/") {
               // Trang chủ -> theo role
-              fullPath = user?.role === "Client" ? "/customer" : "/";
+              fullPath = user?.role === "Client" ? "" : "/";
             } else {
               fullPath = `${basePath}${item.path}`;
             }

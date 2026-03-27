@@ -304,7 +304,7 @@ export const EditProfile = (): React.JSX.Element => {
                 <BreadcrumbList>
                   <BreadcrumbItem><BreadcrumbLink href="/" className="text-blue-600 hover:text-blue-800">Trang Chủ</BreadcrumbLink></BreadcrumbItem>
                   <BreadcrumbSeparator />
-                  <BreadcrumbItem><BreadcrumbLink href="/customer/booking-list" className="text-blue-600 hover:text-blue-800">Tài khoản của tôi</BreadcrumbLink></BreadcrumbItem>
+                  <BreadcrumbItem><BreadcrumbLink href="/booking-list" className="text-blue-600 hover:text-blue-800">Tài khoản của tôi</BreadcrumbLink></BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem><span className="font-semibold text-blue-900">Chỉnh Sửa Hồ Sơ</span></BreadcrumbItem>
                 </BreadcrumbList>

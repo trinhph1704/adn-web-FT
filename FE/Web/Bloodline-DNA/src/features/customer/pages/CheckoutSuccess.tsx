@@ -223,7 +223,7 @@ const CheckoutSuccess = () => {
 
                 <div className="flex justify-center">
                   <Button
-                    onClick={() => navigate("/customer/booking-list")}
+                    onClick={() => navigate("/booking-list")}
                     className={`h-11 px-6 text-base rounded-lg ${
                       updateStatus.isSuccess
                         ? "bg-teal-600 hover:bg-teal-700"

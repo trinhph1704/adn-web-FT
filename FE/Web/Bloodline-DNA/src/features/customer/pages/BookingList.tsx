@@ -668,7 +668,7 @@ export const BookingList = (): React.JSX.Element => {
                                 <Button 
                                   variant="outline" 
                                   className="w-full sm:w-auto"
-                                  onClick={() => navigate(`/customer/booking-status/${booking.id}`)}
+                                  onClick={() => navigate(`/booking-status/${booking.id}`)}
                                 >
                                   <EyeIcon className="w-4 h-4 mr-2" />
                                   Xem chi tiết
@@ -678,7 +678,7 @@ export const BookingList = (): React.JSX.Element => {
                                 <Button 
                                   className="w-full bg-blue-600 sm:w-auto hover:bg-blue-700"
                                   style={{ color: 'white' }}
-                                  onClick={() => navigate(`/customer/edit-booking/${booking.id}`)}
+                                  onClick={() => navigate(`/edit-booking/${booking.id}`)}
                                 >
                                   <EditIcon className="w-4 h-4 mr-2" />
                                   Sửa

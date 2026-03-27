@@ -1,4 +1,4 @@
-// src/features/customer/api/sampleApi.ts
+// src/features/api/sampleApi.ts
 import rootApi from "../../../apis/rootApi";
 
 export interface SampleInfoPayload {

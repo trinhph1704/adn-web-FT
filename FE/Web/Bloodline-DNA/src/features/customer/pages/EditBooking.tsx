@@ -425,7 +425,7 @@ export const EditBooking = (): React.JSX.Element => {
                 Thử lại
               </Button>
               <Button
-                onClick={() => navigate('/customer/booking-list')}
+                onClick={() => navigate('/booking-list')}
                 variant="outline"
                 className="text-gray-700 border-gray-300 hover:bg-gray-50"
               >
@@ -483,7 +483,7 @@ export const EditBooking = (): React.JSX.Element => {
                 <BreadcrumbList>
                   <BreadcrumbItem><BreadcrumbLink href="/" className="text-blue-600 hover:text-blue-800">Trang Chủ</BreadcrumbLink></BreadcrumbItem>
                   <BreadcrumbSeparator />
-                  <BreadcrumbItem><BreadcrumbLink href="/customer/booking-list" className="text-blue-600 hover:text-blue-800">Tài khoản của tôi</BreadcrumbLink></BreadcrumbItem>
+                  <BreadcrumbItem><BreadcrumbLink href="/booking-list" className="text-blue-600 hover:text-blue-800">Tài khoản của tôi</BreadcrumbLink></BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem><span className="font-semibold text-blue-900">Chỉnh Sửa Lịch Hẹn</span></BreadcrumbItem>
                 </BreadcrumbList>
@@ -603,7 +603,7 @@ export const EditBooking = (): React.JSX.Element => {
               {/* Action Buttons */}
               <div className="flex flex-col gap-4 mt-6 sm:flex-row">
                 <Button
-                  onClick={() => navigate('/customer/booking-list')}
+                  onClick={() => navigate('/booking-list')}
                   variant="outline"
                   className="w-full sm:w-auto"
                 >

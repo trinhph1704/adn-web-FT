@@ -643,7 +643,7 @@ function BookingContent() {
 
                 <div className="flex justify-center gap-4">
                   <Link
-                    href="/customer/bookings"
+                    href="/bookings"
                     className="px-6 py-3 font-semibold text-white bg-blue-900 rounded-lg hover:bg-blue-800"
                   >
                     Xem danh sách đặt lịch

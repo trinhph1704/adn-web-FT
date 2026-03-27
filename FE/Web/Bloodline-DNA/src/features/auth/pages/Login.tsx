@@ -43,7 +43,7 @@ const LoginForm: React.FC = () => {
           navigate("/manager/dashboard");
           break;
         case "Client":
-          navigate("/customer");
+          navigate("");
           break;
         default:
           message.error("Role không hợp lệ");

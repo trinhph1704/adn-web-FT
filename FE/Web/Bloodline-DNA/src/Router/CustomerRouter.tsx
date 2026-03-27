@@ -10,12 +10,12 @@ import {
   EditBooking,
   EditProfile,
   Services
-} from "../features/customer";
-import BlogDetail from "../features/customer/pages/BlogDetails";
-import { BookingStatusPage } from "../features/customer/pages/BookingStatusPage";
-import CheckoutError from "../features/customer/pages/CheckoutError";
-import CheckoutRemainSuccess from "../features/customer/pages/CheckoutRemainSuccess";
-import CheckoutSuccess from "../features/customer/pages/CheckoutSuccess";
+} from "../features";
+import BlogDetail from "../features/pages/BlogDetails";
+import { BookingStatusPage } from "../features/pages/BookingStatusPage";
+import CheckoutError from "../features/pages/CheckoutError";
+import CheckoutRemainSuccess from "../features/pages/CheckoutRemainSuccess";
+import CheckoutSuccess from "../features/pages/CheckoutSuccess";
 import HomePage from "../features/home/pages/HomePage";
 
 export default function CustomerRouter() {

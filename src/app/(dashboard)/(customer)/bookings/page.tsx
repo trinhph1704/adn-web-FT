@@ -186,7 +186,7 @@ export default function CustomerBookingsPage() {
                       </p>
                     </div>
                     <Link
-                      href={`/customer/bookings/${booking.id}`}
+                      href={`/booking-status/${booking.id}`}
                       className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-blue-600 transition-colors border border-blue-600 rounded-lg hover:bg-blue-50"
                     >
                       <Eye size={16} />

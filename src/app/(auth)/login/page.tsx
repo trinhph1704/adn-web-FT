@@ -47,7 +47,7 @@ export default function LoginPage() {
           router.push("/manager/dashboard");
           break;
         case "Client":
-          router.push("/customer");
+          router.push("");
           break;
         default:
           message.error("Role không hợp lệ");

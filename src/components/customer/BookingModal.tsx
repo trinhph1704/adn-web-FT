@@ -196,9 +196,9 @@ export function BookingModal({ isOpen, onClose, selectedService }: BookingModalP
     if (step === 3 && bookingId) {
       const col = selectedService?.collectionMethod;
       if (col === 1) {
-        router.push("/customer/booking-list");
+        router.push("/booking-list");
       } else {
-        router.push(`/customer/booking-status/${bookingId}`);
+        router.push(`/booking-status/${bookingId}`);
       }
       setTimeout(() => {
         resetForm();

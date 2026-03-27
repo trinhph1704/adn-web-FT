@@ -50,12 +50,12 @@ export default function Header() {
     router.push('/login');
   };
 
-  const getClientHomeLink = () => '/customer';
+  const getClientHomeLink = () => '';
 
   const getNavHref = (itemHref: string) => {
     if (userInfo?.role === 'Client') {
-      if (itemHref === '/') return '/customer';
-      return `/customer${itemHref}`;
+      if (itemHref === '/') return '';
+      return `${itemHref}`;
     }
     return itemHref;
   };
@@ -69,12 +69,12 @@ export default function Header() {
     {
       key: 'profile',
       label: 'Hồ sơ cá nhân',
-      onClick: () => router.push('/customer/edit-profile'),
+      onClick: () => router.push('/edit-profile'),
     },
     {
       key: 'bookings',
       label: 'Lịch sử đặt lịch',
-      onClick: () => router.push('/customer/booking-list'),
+      onClick: () => router.push('/booking-list'),
     },
     {
       key: 'logout',
@@ -179,7 +179,7 @@ export default function Header() {
                 </div>
                 <button
                   onClick={() => {
-                    router.push('/customer/booking-list');
+                    router.push('/booking-list');
                     setIsMenuOpen(false);
                   }}
                   className="px-4 py-2 text-sm font-medium text-left text-gray-700 hover:bg-gray-50 rounded-lg"

@@ -95,7 +95,7 @@ export const BookingStatusPage = (): React.JSX.Element => {
                 : "Lịch hẹn không tồn tại hoặc đã bị xóa."}
             </p>
             <Button
-              onClick={() => navigate("/customer/booking-list")}
+              onClick={() => navigate("/booking-list")}
               className="text-white bg-blue-900 hover:bg-blue-800"
             >
               Về Danh Sách
@@ -144,7 +144,7 @@ export const BookingStatusPage = (): React.JSX.Element => {
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
                     <BreadcrumbLink
-                      href="/customer/booking-list"
+                      href="/booking-list"
                       className="text-blue-600 hover:text-blue-800"
                     >
                       Danh Sách Đặt Lịch

@@ -619,10 +619,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       // Otherwise, navigate to booking status
       if (collectionMethod === 1) {
         console.log('📍 Navigating to booking list (AtFacility)');
-        navigate('/customer/booking-list');
+        navigate('/booking-list');
       } else {
         console.log('📍 Navigating to booking status (SelfSample)');
-        navigate(`/customer/booking-status/${bookingId}`);
+        navigate(`/booking-status/${bookingId}`);
       }
       
       // Close modal after a brief delay to ensure navigation completes
@@ -1078,10 +1078,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       // Otherwise, navigate to booking status
                       if (collectionMethod === 1) {
                         console.log('📍 Button: Navigating to booking list (AtFacility)');
-                        navigate('/customer/booking-list');
+                        navigate('/booking-list');
                       } else {
                         console.log('📍 Button: Navigating to booking status (SelfSample)');
-                        navigate(`/customer/booking-status/${bookingId}`);
+                        navigate(`/booking-status/${bookingId}`);
                       }
                       
                       // Close modal after navigation
