@@ -8,9 +8,9 @@ import { Loading } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBookingById } from "@/lib/api/bookings";
 import { BookingStatus } from "@/types";
-import { getStatusConfig } from "@/components/bookingStatus/StatusConfig";
-import { BookingDetailTab } from "@/components/bookingStatus/BookingDetailTab";
-import { BookingProgressTab } from "@/components/bookingStatus/BookingProgressTab";
+import { getStatusConfig } from "@/components/customer/bookingStatus/StatusConfig";
+import { BookingDetailTab } from "@/components/customer/bookingStatus/BookingDetailTab";
+import { BookingProgressTab } from "@/components/customer/bookingStatus/BookingProgressTab";
 
 export default function BookingStatusPage() {
   const params = useParams();
